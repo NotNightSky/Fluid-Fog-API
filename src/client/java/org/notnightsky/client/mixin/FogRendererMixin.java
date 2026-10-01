@@ -1,24 +1,25 @@
 package org.notnightsky.client.mixin;
 
-import java.util.Arrays;
+import java.util.List;
 
 import net.minecraft.client.renderer.fog.FogRenderer;
 import net.minecraft.client.renderer.fog.environment.FogEnvironment;
-import org.notnightsky.client.FluidFogTestingClient;
 import org.notnightsky.client.render.fog.environment.TestFluidEnvironment;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(FogRenderer.class)
 public class FogRendererMixin {
-    @ModifyArg(method = "<clinit>", at = @At(value = "INVOKE", target = "Lcom/google/common/collect/Lists;newArrayList([Ljava/lang/Object;)Ljava/util/ArrayList;", remap = false), index = 0)
-    private static Object[] appendCustomFogEnvironment(Object[] originalArray) {
-        FogEnvironment[] newArray = Arrays.copyOf(originalArray, originalArray.length + 1, FogEnvironment[].class);
+    @Final
+    @Shadow
+    private static List<FogEnvironment> FOG_ENVIRONMENTS;
 
-        newArray[originalArray.length] = new TestFluidEnvironment();
-
-        return newArray;
+    @Inject(method = "<clinit>", at = @At("TAIL"))
+    private static void appendCustomFogEnvironment(CallbackInfo ci) {
+        FOG_ENVIRONMENTS.add(new TestFluidEnvironment());
     }
 }
-

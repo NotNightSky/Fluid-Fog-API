@@ -26,12 +26,12 @@ public abstract class CameraMixin {
 	private Vec3 position;
 
 	@Final
-    @Shadow
+	@Shadow
 	private BlockPos.MutableBlockPos blockPosition;
 
 	@Inject(method = "getFluidInCamera", at = @At("HEAD"), cancellable = true)
 	private void fluidfogtesting$getTestFluidFogType(CallbackInfoReturnable<FogType> cir) {
-		if (!initialized || level == null || position == null || blockPosition == null) {
+		if (!initialized) {
 			return;
 		}
 
@@ -41,7 +41,7 @@ public abstract class CameraMixin {
 		}
 
 		float height = fluidState.getHeightForCamera(level, blockPosition);
-		if (position.y < (double) (blockPosition.getY() + height)) {
+		if (position.y < blockPosition.getY() + height) {
 			try {
 				cir.setReturnValue(FogType.valueOf("FLUIDFOGTESTING_TEST_FLUID"));
 			} catch (IllegalArgumentException ignored) {
