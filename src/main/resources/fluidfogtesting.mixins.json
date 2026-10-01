@@ -1,0 +1,14 @@
+{
+	"required": true,
+	"package": "org.notnightsky.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"mixins": [
+		"FogTypeMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}
