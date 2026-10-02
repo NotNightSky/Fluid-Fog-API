@@ -15,6 +15,12 @@ public class ModFluids {
 	public static final FlowingFluid TEST_FLUID_STILL = register(TEST_FLUID_STILL_KEY, new TestFluid.Source());
 	public static final FlowingFluid TEST_FLUID_FLOWING = register(TEST_FLUID_FLOWING_KEY, new TestFluid.Flowing());
 
+	public static final ResourceKey<Fluid> A_TEST_FLUID_STILL_KEY = create("a_test_fluid");
+	public static final ResourceKey<Fluid> A_TEST_FLUID_FLOWING_KEY = create("flowing_a_test_fluid");
+
+	public static final FlowingFluid A_TEST_FLUID_STILL = register(A_TEST_FLUID_STILL_KEY, new ATestFluid.Source());
+	public static final FlowingFluid A_TEST_FLUID_FLOWING = register(A_TEST_FLUID_FLOWING_KEY, new ATestFluid.Flowing());
+
 	public static ResourceKey<Fluid> create(String name) {
 		return ResourceKey.create(Registries.FLUID, FluidFogTesting.id(name));
 	}

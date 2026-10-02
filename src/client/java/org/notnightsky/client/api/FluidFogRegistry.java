@@ -2,6 +2,7 @@ package org.notnightsky.client.api;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.material.Fluid;
+import org.jspecify.annotations.Nullable;
 import org.notnightsky.client.mixin.FogRendererAccessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,5 +59,15 @@ public final class FluidFogRegistry {
      */
     public static boolean hasEnvironment(Fluid fluid) {
         return BY_FLUID.containsKey(fluid);
+    }
+
+    /**
+     * <p>This method is used to find the environment assigned to the fluid.
+     *
+     * @param fluid The Fluid to look up.
+     * @return The environment registered for the fluid, or null if none.
+     */
+    public static @Nullable FabricFogEnvironment getEnvironment(Fluid fluid) {
+        return BY_FLUID.get(fluid);
     }
 }

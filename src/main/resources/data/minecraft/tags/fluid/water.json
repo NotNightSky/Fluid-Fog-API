@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "fluidfogtesting:test_fluid",
-    "fluidfogtesting:flowing_test_fluid"
+    "fluidfogtesting:flowing_test_fluid",
+    "fluidfogtesting:a_test_fluid",
+    "fluidfogtesting:flowing_a_test_fluid"
   ]
 }

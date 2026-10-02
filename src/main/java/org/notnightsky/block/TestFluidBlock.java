@@ -12,4 +12,8 @@ public class TestFluidBlock extends net.minecraft.world.level.block.LiquidBlock 
 	public static TestFluidBlock forTestFluid(BlockBehaviour.Properties properties) {
 		return new TestFluidBlock(ModFluids.TEST_FLUID_STILL, properties);
 	}
+
+	public static TestFluidBlock forATestFluid(BlockBehaviour.Properties properties) {
+		return new TestFluidBlock(ModFluids.A_TEST_FLUID_STILL, properties);
+	}
 }

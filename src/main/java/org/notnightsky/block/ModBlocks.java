@@ -20,6 +20,14 @@ public class ModBlocks {
 			BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)
 	);
 
+	public static final ResourceKey<Block> A_TEST_FLUID_KEY = ResourceKey.create(Registries.BLOCK, FluidFogTesting.id("a_test_fluid"));
+
+	public static final Block A_TEST_FLUID = register(
+			A_TEST_FLUID_KEY,
+			TestFluidBlock::forATestFluid,
+			BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)
+	);
+
 	private static Block register(ResourceKey<Block> id, Function<BlockBehaviour.Properties, Block> blockFactory, BlockBehaviour.Properties properties) {
 		Block block = blockFactory.apply(properties.setId(id));
 		return Registry.register(BuiltInRegistries.BLOCK, id, block);

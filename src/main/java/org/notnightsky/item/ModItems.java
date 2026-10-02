@@ -23,6 +23,16 @@ public class ModItems {
 					.stacksTo(1)
 	);
 
+	public static final ResourceKey<Item> A_TEST_FLUID_BUCKET_KEY = ResourceKey.create(Registries.ITEM, FluidFogTesting.id("a_test_fluid_bucket"));
+
+	public static final Item A_TEST_FLUID_BUCKET = register(
+			A_TEST_FLUID_BUCKET_KEY,
+			props -> new BucketItem(ModFluids.A_TEST_FLUID_STILL, props),
+			new Item.Properties()
+					.craftRemainder(Items.BUCKET)
+					.stacksTo(1)
+	);
+
 	public static Item register(ResourceKey<Item> itemKey, Function<Item.Properties, Item> itemFactory, Item.Properties settings) {
 		Item item = itemFactory.apply(settings.setId(itemKey));
 		Registry.register(BuiltInRegistries.ITEM, itemKey, item);
