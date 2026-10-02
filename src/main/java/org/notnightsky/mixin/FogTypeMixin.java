@@ -5,5 +5,5 @@ import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(FogType.class)
 enum FogTypeMixin {
-    FLUIDFOGTESTING_TEST_FLUID
+    FABRIC_API_FLUID_FOG
 }

@@ -7,6 +7,8 @@ import net.minecraft.client.renderer.block.FluidModel;
 import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
+import org.notnightsky.client.api.FluidFogRegistry;
+import org.notnightsky.client.render.fog.environment.TestFluidEnvironment;
 import org.notnightsky.fluid.ModFluids;
 
 public class FluidFogTestingClient implements ClientModInitializer {
@@ -22,5 +24,7 @@ public class FluidFogTestingClient implements ClientModInitializer {
 						BlockTintSources.constant(ARGB.opaque(0x075800))
 				)
 		);
+
+		FluidFogRegistry.register(ModFluids.TEST_FLUID_STILL, ModFluids.TEST_FLUID_FLOWING, new TestFluidEnvironment());
 	}
 }

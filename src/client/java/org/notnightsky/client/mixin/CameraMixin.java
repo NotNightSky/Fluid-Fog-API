@@ -6,7 +6,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.FogType;
 import net.minecraft.world.phys.Vec3;
-import org.notnightsky.fluid.TestFluid;
+import org.notnightsky.client.api.FluidFogRegistry;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -31,21 +31,13 @@ public abstract class CameraMixin {
 
 	@Inject(method = "getFluidInCamera", at = @At("HEAD"), cancellable = true)
 	private void fluidfogtesting$getTestFluidFogType(CallbackInfoReturnable<FogType> cir) {
-		if (!initialized) {
-			return;
+		if (!initialized) return;
+		FluidState state = level.getFluidState(blockPosition);
+		if (!FluidFogRegistry.hasEnvironment(state.getType())) return;
+
+		if (position.y < blockPosition.getY() + state.getHeightForCamera(level, blockPosition)) {
+			cir.setReturnValue(FogType.valueOf("FABRIC_API_FLUID_FOG"));
 		}
 
-		FluidState fluidState = level.getFluidState(blockPosition);
-		if (!(fluidState.getType() instanceof TestFluid)) {
-			return;
-		}
-
-		float height = fluidState.getHeightForCamera(level, blockPosition);
-		if (position.y < blockPosition.getY() + height) {
-			try {
-				cir.setReturnValue(FogType.valueOf("FLUIDFOGTESTING_TEST_FLUID"));
-			} catch (IllegalArgumentException ignored) {
-			}
-		}
 	}
 }
