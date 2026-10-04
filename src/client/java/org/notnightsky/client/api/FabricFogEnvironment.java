@@ -9,7 +9,7 @@ import org.jspecify.annotations.NonNull;
 
 public abstract class FabricFogEnvironment extends FogEnvironment {
     @Override
-    public final boolean isApplicable(FogType type, @NonNull Entity entity) {
+    public final boolean isApplicable(FogType type, Entity entity) {
         if (type == null || !"FABRIC_API_FLUID_FOG".equals(type.name())) {
             return false;
         }
