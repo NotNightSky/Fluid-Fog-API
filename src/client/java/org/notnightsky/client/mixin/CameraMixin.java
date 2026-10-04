@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Camera.class)
-public abstract class CameraMixin {
+private abstract class CameraMixin {
 	@Shadow
 	private boolean initialized;
 
