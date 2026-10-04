@@ -21,15 +21,23 @@ public final class FluidFogRegistry {
     private FluidFogRegistry() {}
 
     /**
-     * <p>This method is used to register the {@code FabricFogEnvironment}.
+     * This method is used to register the {@code FabricFogEnvironment}.
      *
      * <p>Note that environments are automatically associated with the fluid
      * by the {@code still} and {@code flowing} arguments. Therefore, no further
      * registrations are required to make the fog function.
      *
-     * @param still The fluid's still type resource key.
-     * @param flowing The fluid's flowing type resource key.
-     * @param env The {@code FabricFogEnvironment} that is to be used for these fluid states.
+     * <p><b>Example usage:</b>
+     * <pre>{@code
+     * // In your client initialization:
+     * FluidFogRegistry.register(MyFluids.ACID_STILL, MyFluids.ACID_FLOWING, new AcidFluidFogEnvironment());
+     * }</pre>
+     *
+     * @param still The fluid's still {@code Fluid} object.
+     * @param flowing The fluid's flowing {@code Fluid} object.
+     * @param env The {@link FabricFogEnvironment} that is to be used for these fluid states.
+     *
+     * @see FabricFogEnvironment
      */
     public static void register(Fluid still, Fluid flowing, FabricFogEnvironment env) {
         Objects.requireNonNull(still, "still");

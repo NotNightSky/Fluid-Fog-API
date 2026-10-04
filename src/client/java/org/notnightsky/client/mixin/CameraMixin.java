@@ -10,12 +10,13 @@ import org.notnightsky.client.api.FluidFogRegistry;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Camera.class)
-public abstract class CameraMixin {
+abstract class CameraMixin {
 	@Shadow
 	private boolean initialized;
 
@@ -29,6 +30,9 @@ public abstract class CameraMixin {
 	@Shadow
 	private BlockPos.MutableBlockPos blockPosition;
 
+	@Unique
+    private static FogType FABRIC_API_FLUID_FOG;
+
 	@Inject(method = "getFluidInCamera", at = @At("HEAD"), cancellable = true)
 	private void fluidfogtesting$getTestFluidFogType(CallbackInfoReturnable<FogType> cir) {
 		if (!initialized) return;
@@ -36,7 +40,10 @@ public abstract class CameraMixin {
 		if (!FluidFogRegistry.hasEnvironment(state.getType())) return;
 
 		if (position.y < blockPosition.getY() + state.getHeightForCamera(level, blockPosition)) {
-			cir.setReturnValue(FogType.valueOf("FABRIC_API_FLUID_FOG"));
+			if (FABRIC_API_FLUID_FOG == null) {
+				FABRIC_API_FLUID_FOG = FogType.valueOf("FABRIC_API_FLUID_FOG");
+			}
+			cir.setReturnValue(FABRIC_API_FLUID_FOG);
 		}
 
 	}
