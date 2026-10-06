@@ -5,7 +5,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FogType;
-import org.jspecify.annotations.NonNull;
 
 /**
  * This abstract class extends {@link FogEnvironment} to provide the required {@code isApplicable()} method.
